@@ -8,20 +8,20 @@ function(nimba_vision_setup_dependencies)
   # For each dependency, see if it's
   # already been provided to us by a parent project
 
-  if(NOT TARGET fmtlib::fmtlib)
-    cpmaddpackage("gh:fmtlib/fmt#9.1.0")
-  endif()
+    # if(NOT TARGET fmtlib::fmtlib)
+  #   cpmaddpackage("gh:fmtlib/fmt#10.2.1")
+  # endif()
 
   if(NOT TARGET spdlog::spdlog)
     cpmaddpackage(
       NAME
       spdlog
       VERSION
-      1.11.0
+      1.14.1
       GITHUB_REPOSITORY
       "gabime/spdlog"
       OPTIONS
-      "SPDLOG_FMT_EXTERNAL ON")
+      "SPDLOG_FMT_EXTERNAL OFF")
   endif()
 
   if(NOT TARGET Catch2::Catch2WithMain)
