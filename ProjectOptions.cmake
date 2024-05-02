@@ -4,7 +4,7 @@ include(CMakeDependentOption)
 include(CheckCXXCompilerFlag)
 
 
-macro(myproject_supports_sanitizers)
+macro(nimba_vision_supports_sanitizers)
   if((CMAKE_CXX_COMPILER_ID MATCHES ".*Clang.*" OR CMAKE_CXX_COMPILER_ID MATCHES ".*GNU.*") AND NOT WIN32)
     set(SUPPORTS_UBSAN ON)
   else()
@@ -18,183 +18,183 @@ macro(myproject_supports_sanitizers)
   endif()
 endmacro()
 
-macro(myproject_setup_options)
-  option(myproject_ENABLE_HARDENING "Enable hardening" ON)
-  option(myproject_ENABLE_COVERAGE "Enable coverage reporting" OFF)
+macro(nimba_vision_setup_options)
+  option(nimba_vision_ENABLE_HARDENING "Enable hardening" ON)
+  option(nimba_vision_ENABLE_COVERAGE "Enable coverage reporting" OFF)
   cmake_dependent_option(
-    myproject_ENABLE_GLOBAL_HARDENING
+    nimba_vision_ENABLE_GLOBAL_HARDENING
     "Attempt to push hardening options to built dependencies"
     ON
-    myproject_ENABLE_HARDENING
+    nimba_vision_ENABLE_HARDENING
     OFF)
 
-  myproject_supports_sanitizers()
+  nimba_vision_supports_sanitizers()
 
-  if(NOT PROJECT_IS_TOP_LEVEL OR myproject_PACKAGING_MAINTAINER_MODE)
-    option(myproject_ENABLE_IPO "Enable IPO/LTO" OFF)
-    option(myproject_WARNINGS_AS_ERRORS "Treat Warnings As Errors" OFF)
-    option(myproject_ENABLE_USER_LINKER "Enable user-selected linker" OFF)
-    option(myproject_ENABLE_SANITIZER_ADDRESS "Enable address sanitizer" OFF)
-    option(myproject_ENABLE_SANITIZER_LEAK "Enable leak sanitizer" OFF)
-    option(myproject_ENABLE_SANITIZER_UNDEFINED "Enable undefined sanitizer" OFF)
-    option(myproject_ENABLE_SANITIZER_THREAD "Enable thread sanitizer" OFF)
-    option(myproject_ENABLE_SANITIZER_MEMORY "Enable memory sanitizer" OFF)
-    option(myproject_ENABLE_UNITY_BUILD "Enable unity builds" OFF)
-    option(myproject_ENABLE_CLANG_TIDY "Enable clang-tidy" OFF)
-    option(myproject_ENABLE_CPPCHECK "Enable cpp-check analysis" OFF)
-    option(myproject_ENABLE_PCH "Enable precompiled headers" OFF)
-    option(myproject_ENABLE_CACHE "Enable ccache" OFF)
+  if(NOT PROJECT_IS_TOP_LEVEL OR nimba_vision_PACKAGING_MAINTAINER_MODE)
+    option(nimba_vision_ENABLE_IPO "Enable IPO/LTO" OFF)
+    option(nimba_vision_WARNINGS_AS_ERRORS "Treat Warnings As Errors" OFF)
+    option(nimba_vision_ENABLE_USER_LINKER "Enable user-selected linker" OFF)
+    option(nimba_vision_ENABLE_SANITIZER_ADDRESS "Enable address sanitizer" OFF)
+    option(nimba_vision_ENABLE_SANITIZER_LEAK "Enable leak sanitizer" OFF)
+    option(nimba_vision_ENABLE_SANITIZER_UNDEFINED "Enable undefined sanitizer" OFF)
+    option(nimba_vision_ENABLE_SANITIZER_THREAD "Enable thread sanitizer" OFF)
+    option(nimba_vision_ENABLE_SANITIZER_MEMORY "Enable memory sanitizer" OFF)
+    option(nimba_vision_ENABLE_UNITY_BUILD "Enable unity builds" OFF)
+    option(nimba_vision_ENABLE_CLANG_TIDY "Enable clang-tidy" OFF)
+    option(nimba_vision_ENABLE_CPPCHECK "Enable cpp-check analysis" OFF)
+    option(nimba_vision_ENABLE_PCH "Enable precompiled headers" OFF)
+    option(nimba_vision_ENABLE_CACHE "Enable ccache" OFF)
   else()
-    option(myproject_ENABLE_IPO "Enable IPO/LTO" ON)
-    option(myproject_WARNINGS_AS_ERRORS "Treat Warnings As Errors" ON)
-    option(myproject_ENABLE_USER_LINKER "Enable user-selected linker" OFF)
-    option(myproject_ENABLE_SANITIZER_ADDRESS "Enable address sanitizer" ${SUPPORTS_ASAN})
-    option(myproject_ENABLE_SANITIZER_LEAK "Enable leak sanitizer" OFF)
-    option(myproject_ENABLE_SANITIZER_UNDEFINED "Enable undefined sanitizer" ${SUPPORTS_UBSAN})
-    option(myproject_ENABLE_SANITIZER_THREAD "Enable thread sanitizer" OFF)
-    option(myproject_ENABLE_SANITIZER_MEMORY "Enable memory sanitizer" OFF)
-    option(myproject_ENABLE_UNITY_BUILD "Enable unity builds" OFF)
-    option(myproject_ENABLE_CLANG_TIDY "Enable clang-tidy" ON)
-    option(myproject_ENABLE_CPPCHECK "Enable cpp-check analysis" ON)
-    option(myproject_ENABLE_PCH "Enable precompiled headers" OFF)
-    option(myproject_ENABLE_CACHE "Enable ccache" ON)
+    option(nimba_vision_ENABLE_IPO "Enable IPO/LTO" ON)
+    option(nimba_vision_WARNINGS_AS_ERRORS "Treat Warnings As Errors" ON)
+    option(nimba_vision_ENABLE_USER_LINKER "Enable user-selected linker" OFF)
+    option(nimba_vision_ENABLE_SANITIZER_ADDRESS "Enable address sanitizer" ${SUPPORTS_ASAN})
+    option(nimba_vision_ENABLE_SANITIZER_LEAK "Enable leak sanitizer" OFF)
+    option(nimba_vision_ENABLE_SANITIZER_UNDEFINED "Enable undefined sanitizer" ${SUPPORTS_UBSAN})
+    option(nimba_vision_ENABLE_SANITIZER_THREAD "Enable thread sanitizer" OFF)
+    option(nimba_vision_ENABLE_SANITIZER_MEMORY "Enable memory sanitizer" OFF)
+    option(nimba_vision_ENABLE_UNITY_BUILD "Enable unity builds" OFF)
+    option(nimba_vision_ENABLE_CLANG_TIDY "Enable clang-tidy" ON)
+    option(nimba_vision_ENABLE_CPPCHECK "Enable cpp-check analysis" ON)
+    option(nimba_vision_ENABLE_PCH "Enable precompiled headers" OFF)
+    option(nimba_vision_ENABLE_CACHE "Enable ccache" ON)
   endif()
 
   if(NOT PROJECT_IS_TOP_LEVEL)
     mark_as_advanced(
-      myproject_ENABLE_IPO
-      myproject_WARNINGS_AS_ERRORS
-      myproject_ENABLE_USER_LINKER
-      myproject_ENABLE_SANITIZER_ADDRESS
-      myproject_ENABLE_SANITIZER_LEAK
-      myproject_ENABLE_SANITIZER_UNDEFINED
-      myproject_ENABLE_SANITIZER_THREAD
-      myproject_ENABLE_SANITIZER_MEMORY
-      myproject_ENABLE_UNITY_BUILD
-      myproject_ENABLE_CLANG_TIDY
-      myproject_ENABLE_CPPCHECK
-      myproject_ENABLE_COVERAGE
-      myproject_ENABLE_PCH
-      myproject_ENABLE_CACHE)
+      nimba_vision_ENABLE_IPO
+      nimba_vision_WARNINGS_AS_ERRORS
+      nimba_vision_ENABLE_USER_LINKER
+      nimba_vision_ENABLE_SANITIZER_ADDRESS
+      nimba_vision_ENABLE_SANITIZER_LEAK
+      nimba_vision_ENABLE_SANITIZER_UNDEFINED
+      nimba_vision_ENABLE_SANITIZER_THREAD
+      nimba_vision_ENABLE_SANITIZER_MEMORY
+      nimba_vision_ENABLE_UNITY_BUILD
+      nimba_vision_ENABLE_CLANG_TIDY
+      nimba_vision_ENABLE_CPPCHECK
+      nimba_vision_ENABLE_COVERAGE
+      nimba_vision_ENABLE_PCH
+      nimba_vision_ENABLE_CACHE)
   endif()
 
-  myproject_check_libfuzzer_support(LIBFUZZER_SUPPORTED)
-  if(LIBFUZZER_SUPPORTED AND (myproject_ENABLE_SANITIZER_ADDRESS OR myproject_ENABLE_SANITIZER_THREAD OR myproject_ENABLE_SANITIZER_UNDEFINED))
+  nimba_vision_check_libfuzzer_support(LIBFUZZER_SUPPORTED)
+  if(LIBFUZZER_SUPPORTED AND (nimba_vision_ENABLE_SANITIZER_ADDRESS OR nimba_vision_ENABLE_SANITIZER_THREAD OR nimba_vision_ENABLE_SANITIZER_UNDEFINED))
     set(DEFAULT_FUZZER ON)
   else()
     set(DEFAULT_FUZZER OFF)
   endif()
 
-  option(myproject_BUILD_FUZZ_TESTS "Enable fuzz testing executable" ${DEFAULT_FUZZER})
+  option(nimba_vision_BUILD_FUZZ_TESTS "Enable fuzz testing executable" ${DEFAULT_FUZZER})
 
 endmacro()
 
-macro(myproject_global_options)
-  if(myproject_ENABLE_IPO)
+macro(nimba_vision_global_options)
+  if(nimba_vision_ENABLE_IPO)
     include(cmake/InterproceduralOptimization.cmake)
-    myproject_enable_ipo()
+    nimba_vision_enable_ipo()
   endif()
 
-  myproject_supports_sanitizers()
+  nimba_vision_supports_sanitizers()
 
-  if(myproject_ENABLE_HARDENING AND myproject_ENABLE_GLOBAL_HARDENING)
+  if(nimba_vision_ENABLE_HARDENING AND nimba_vision_ENABLE_GLOBAL_HARDENING)
     include(cmake/Hardening.cmake)
     if(NOT SUPPORTS_UBSAN 
-       OR myproject_ENABLE_SANITIZER_UNDEFINED
-       OR myproject_ENABLE_SANITIZER_ADDRESS
-       OR myproject_ENABLE_SANITIZER_THREAD
-       OR myproject_ENABLE_SANITIZER_LEAK)
+       OR nimba_vision_ENABLE_SANITIZER_UNDEFINED
+       OR nimba_vision_ENABLE_SANITIZER_ADDRESS
+       OR nimba_vision_ENABLE_SANITIZER_THREAD
+       OR nimba_vision_ENABLE_SANITIZER_LEAK)
       set(ENABLE_UBSAN_MINIMAL_RUNTIME FALSE)
     else()
       set(ENABLE_UBSAN_MINIMAL_RUNTIME TRUE)
     endif()
-    message("${myproject_ENABLE_HARDENING} ${ENABLE_UBSAN_MINIMAL_RUNTIME} ${myproject_ENABLE_SANITIZER_UNDEFINED}")
-    myproject_enable_hardening(myproject_options ON ${ENABLE_UBSAN_MINIMAL_RUNTIME})
+    message("${nimba_vision_ENABLE_HARDENING} ${ENABLE_UBSAN_MINIMAL_RUNTIME} ${nimba_vision_ENABLE_SANITIZER_UNDEFINED}")
+    nimba_vision_enable_hardening(nimba_vision_options ON ${ENABLE_UBSAN_MINIMAL_RUNTIME})
   endif()
 endmacro()
 
-macro(myproject_local_options)
+macro(nimba_vision_local_options)
   if(PROJECT_IS_TOP_LEVEL)
     include(cmake/StandardProjectSettings.cmake)
   endif()
 
-  add_library(myproject_warnings INTERFACE)
-  add_library(myproject_options INTERFACE)
+  add_library(nimba_vision_warnings INTERFACE)
+  add_library(nimba_vision_options INTERFACE)
 
   include(cmake/CompilerWarnings.cmake)
-  myproject_set_project_warnings(
-    myproject_warnings
-    ${myproject_WARNINGS_AS_ERRORS}
+  nimba_vision_set_project_warnings(
+    nimba_vision_warnings
+    ${nimba_vision_WARNINGS_AS_ERRORS}
     ""
     ""
     ""
     "")
 
-  if(myproject_ENABLE_USER_LINKER)
+  if(nimba_vision_ENABLE_USER_LINKER)
     include(cmake/Linker.cmake)
-    myproject_configure_linker(myproject_options)
+    nimba_vision_configure_linker(nimba_vision_options)
   endif()
 
   include(cmake/Sanitizers.cmake)
-  myproject_enable_sanitizers(
-    myproject_options
-    ${myproject_ENABLE_SANITIZER_ADDRESS}
-    ${myproject_ENABLE_SANITIZER_LEAK}
-    ${myproject_ENABLE_SANITIZER_UNDEFINED}
-    ${myproject_ENABLE_SANITIZER_THREAD}
-    ${myproject_ENABLE_SANITIZER_MEMORY})
+  nimba_vision_enable_sanitizers(
+    nimba_vision_options
+    ${nimba_vision_ENABLE_SANITIZER_ADDRESS}
+    ${nimba_vision_ENABLE_SANITIZER_LEAK}
+    ${nimba_vision_ENABLE_SANITIZER_UNDEFINED}
+    ${nimba_vision_ENABLE_SANITIZER_THREAD}
+    ${nimba_vision_ENABLE_SANITIZER_MEMORY})
 
-  set_target_properties(myproject_options PROPERTIES UNITY_BUILD ${myproject_ENABLE_UNITY_BUILD})
+  set_target_properties(nimba_vision_options PROPERTIES UNITY_BUILD ${nimba_vision_ENABLE_UNITY_BUILD})
 
-  if(myproject_ENABLE_PCH)
+  if(nimba_vision_ENABLE_PCH)
     target_precompile_headers(
-      myproject_options
+      nimba_vision_options
       INTERFACE
       <vector>
       <string>
       <utility>)
   endif()
 
-  if(myproject_ENABLE_CACHE)
+  if(nimba_vision_ENABLE_CACHE)
     include(cmake/Cache.cmake)
-    myproject_enable_cache()
+    nimba_vision_enable_cache()
   endif()
 
   include(cmake/StaticAnalyzers.cmake)
-  if(myproject_ENABLE_CLANG_TIDY)
-    myproject_enable_clang_tidy(myproject_options ${myproject_WARNINGS_AS_ERRORS})
+  if(nimba_vision_ENABLE_CLANG_TIDY)
+    nimba_vision_enable_clang_tidy(nimba_vision_options ${nimba_vision_WARNINGS_AS_ERRORS})
   endif()
 
-  if(myproject_ENABLE_CPPCHECK)
-    myproject_enable_cppcheck(${myproject_WARNINGS_AS_ERRORS} "" # override cppcheck options
+  if(nimba_vision_ENABLE_CPPCHECK)
+    nimba_vision_enable_cppcheck(${nimba_vision_WARNINGS_AS_ERRORS} "" # override cppcheck options
     )
   endif()
 
-  if(myproject_ENABLE_COVERAGE)
+  if(nimba_vision_ENABLE_COVERAGE)
     include(cmake/Tests.cmake)
-    myproject_enable_coverage(myproject_options)
+    nimba_vision_enable_coverage(nimba_vision_options)
   endif()
 
-  if(myproject_WARNINGS_AS_ERRORS)
+  if(nimba_vision_WARNINGS_AS_ERRORS)
     check_cxx_compiler_flag("-Wl,--fatal-warnings" LINKER_FATAL_WARNINGS)
     if(LINKER_FATAL_WARNINGS)
       # This is not working consistently, so disabling for now
-      # target_link_options(myproject_options INTERFACE -Wl,--fatal-warnings)
+      # target_link_options(nimba_vision_options INTERFACE -Wl,--fatal-warnings)
     endif()
   endif()
 
-  if(myproject_ENABLE_HARDENING AND NOT myproject_ENABLE_GLOBAL_HARDENING)
+  if(nimba_vision_ENABLE_HARDENING AND NOT nimba_vision_ENABLE_GLOBAL_HARDENING)
     include(cmake/Hardening.cmake)
     if(NOT SUPPORTS_UBSAN 
-       OR myproject_ENABLE_SANITIZER_UNDEFINED
-       OR myproject_ENABLE_SANITIZER_ADDRESS
-       OR myproject_ENABLE_SANITIZER_THREAD
-       OR myproject_ENABLE_SANITIZER_LEAK)
+       OR nimba_vision_ENABLE_SANITIZER_UNDEFINED
+       OR nimba_vision_ENABLE_SANITIZER_ADDRESS
+       OR nimba_vision_ENABLE_SANITIZER_THREAD
+       OR nimba_vision_ENABLE_SANITIZER_LEAK)
       set(ENABLE_UBSAN_MINIMAL_RUNTIME FALSE)
     else()
       set(ENABLE_UBSAN_MINIMAL_RUNTIME TRUE)
     endif()
-    myproject_enable_hardening(myproject_options OFF ${ENABLE_UBSAN_MINIMAL_RUNTIME})
+    nimba_vision_enable_hardening(nimba_vision_options OFF ${ENABLE_UBSAN_MINIMAL_RUNTIME})
   endif()
 
 endmacro()
